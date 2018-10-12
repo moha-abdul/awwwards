@@ -9,6 +9,7 @@ from django.template.loader import render_to_string
 from .tokens import account_activation_token
 from .forms import SignupForm
 from django.contrib.auth.models import User
+from .models import Profile
 from django.core.mail import EmailMessage
 
 
@@ -19,8 +20,8 @@ def signup(request):
             user = form.save(commit=False)
             user.is_active = False
             user.save()
-            # profile=Profile(user=user)
-            # profile.save()             
+            profile=Profile(user=user)
+            profile.save()             
             current_site = get_current_site(request)
             mail_subject = 'Activate your instaClown account.'
             message = render_to_string('registration/acc_active_email.html', {
@@ -56,3 +57,26 @@ def activate(request, uidb64, token):
 
 def home(request):
     return render(request, 'awwards/index.html')
+
+@login_required(login_url="/accounts/login/")
+def view_profile(request):
+    current_user = request.user
+    profile=Profile.objects.filter(user=request.user)
+    # images=Image.objects.filter(user=request.user)
+    return render (request,'awwards/profile.html',{'profile':profile,})
+
+@login_required
+def edit_profile(request):
+    # images = Image.objects.all()
+    profile = Profile.objects.filter(user=request.user)
+    current_user = request.user
+    # photos = Image.objects.filter(user=current_user)
+    prof_form = ProfileForm()
+    if request.method == 'POST':
+        prof_form =ProfileForm(request.POST,request.FILES,instance=request.user.profile)
+        if prof_form.is_valid:
+            prof_form.save()
+        else:
+            prof_form = ProfileForm()
+            return render(request, 'awwards/edit-profile.html', {"image_form": image_form,"photos":photos,"profile":profile,"images":images})
+    return render(request, 'awwards/edit-profile.html', {"prof_form":photos,"profile":profile})
