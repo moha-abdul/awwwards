@@ -7,6 +7,7 @@ from django.utils.encoding import force_bytes, force_text
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 from django.template.loader import render_to_string
 from .tokens import account_activation_token
+from .forms import SignupForm
 from django.contrib.auth.models import User
 from django.core.mail import EmailMessage
 
@@ -18,8 +19,8 @@ def signup(request):
             user = form.save(commit=False)
             user.is_active = False
             user.save()
-            profile=Profile(user=user)
-            profile.save()             
+            # profile=Profile(user=user)
+            # profile.save()             
             current_site = get_current_site(request)
             mail_subject = 'Activate your instaClown account.'
             message = render_to_string('registration/acc_active_email.html', {
