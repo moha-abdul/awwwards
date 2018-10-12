@@ -7,7 +7,7 @@ from django.utils.encoding import force_bytes, force_text
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 from django.template.loader import render_to_string
 from .tokens import account_activation_token
-from .forms import SignupForm
+from .forms import SignupForm,ProfileForm
 from django.contrib.auth.models import User
 from .models import Profile
 from django.core.mail import EmailMessage
@@ -59,7 +59,7 @@ def home(request):
     return render(request, 'awwards/index.html')
 
 @login_required(login_url="/accounts/login/")
-def view_profile(request):
+def profile(request):
     current_user = request.user
     profile=Profile.objects.filter(user=request.user)
     # images=Image.objects.filter(user=request.user)
@@ -78,5 +78,5 @@ def edit_profile(request):
             prof_form.save()
         else:
             prof_form = ProfileForm()
-            return render(request, 'awwards/edit-profile.html', {"image_form": image_form,"photos":photos,"profile":profile,"images":images})
-    return render(request, 'awwards/edit-profile.html', {"prof_form":photos,"profile":profile})
+            return render(request, 'awwards/edit-profile.html', {"image_form": image_form,"profile":profile})
+    return render(request, 'awwards/edit-profile.html', {"prof_form":prof_form,"profile":profile})
