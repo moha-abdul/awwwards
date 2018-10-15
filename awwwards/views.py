@@ -100,3 +100,17 @@ def add_project(request):
 def single_project(request,project_id):
     project = Project.objects.get(id=project_id)
     return render(request,'awwards/single-project.html',{"project":project})
+
+@login_required
+def search_project(request):
+
+    if 'project' in request.GET and request.GET["project"]:
+        search_term = request.GET.get("project")
+        searched_projects = Project.search_by_project(search_term)
+        message = f"{search_term}"
+
+        return render(request, 'awwards/search.html',{"message":message,"projects": searched_projects})
+
+    else:
+        message = "Project not found"
+        return render(request, 'awwards/search.html',{"message":message})
