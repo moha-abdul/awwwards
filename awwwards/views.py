@@ -23,7 +23,7 @@ def signup(request):
             profile=Profile(user=user)
             profile.save()             
             current_site = get_current_site(request)
-            mail_subject = 'Activate your instaClown account.'
+            mail_subject = 'Activate your awwwwwwwwwwww account.'
             message = render_to_string('registration/acc_active_email.html', {
                 'user': user,
                 'domain': current_site.domain,
@@ -63,7 +63,7 @@ def profile(request):
     current_user = request.user
     profile=Profile.objects.filter(user=request.user)
     # images=Image.objects.filter(user=request.user)
-    return render (request,'awwards/profile.html',{'profile':profile,})
+    return render (request,'awwards/profile.html',{'profile':profile})
 
 @login_required
 def edit_profile(request):
@@ -78,5 +78,5 @@ def edit_profile(request):
             prof_form.save()
         else:
             prof_form = ProfileForm()
-            return render(request, 'awwards/edit-profile.html', {"image_form": image_form,"profile":profile})
+            return render(request, 'awwards/edit-profile.html', {"prof_form": prof_form,"profile":profile})
     return render(request, 'awwards/edit-profile.html', {"prof_form":prof_form,"profile":profile})
