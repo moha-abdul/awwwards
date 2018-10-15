@@ -9,7 +9,7 @@ from django.template.loader import render_to_string
 from .tokens import account_activation_token
 from .forms import SignupForm,ProfileForm
 from django.contrib.auth.models import User
-from .models import Profile
+from .models import Profile, Project
 from django.core.mail import EmailMessage
 
 
@@ -56,7 +56,8 @@ def activate(request, uidb64, token):
         return HttpResponse('Activation link is invalid!')
 
 def home(request):
-    return render(request, 'awwards/index.html')
+    projects = Project.objects.all()
+    return render(request, 'awwards/index.html',{"projects": projects})
 
 @login_required(login_url="/accounts/login/")
 def profile(request):
@@ -80,3 +81,6 @@ def edit_profile(request):
             prof_form = ProfileForm()
             return render(request, 'awwards/edit-profile.html', {"prof_form": prof_form,"profile":profile})
     return render(request, 'awwards/edit-profile.html', {"prof_form":prof_form,"profile":profile})
+
+def add_project(request):
+    pass

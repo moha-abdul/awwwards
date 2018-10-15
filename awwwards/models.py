@@ -16,7 +16,8 @@ class Profile(models.Model):
         self.delete()
 
 class Project(models.Model):
-    # user = models.OneToOneField(User,on_delete=models.CASCADE,related_name='profile')
+    user = models.OneToOneField(User,on_delete=models.CASCADE,related_name='user')
+    title = models.CharField(max_length=50)
     description = models.CharField(max_length=50)
     projects = models.CharField(max_length=50)
 
@@ -26,7 +27,7 @@ class Project(models.Model):
     def delete_project(self):
         self.delete()
 
-class Rating(models.Model):
-    design = models.CharField(max_length=50)
-    usability = models.CharField(max_length=50)
-    content = models.CharField(max_length=50)
+# class Rating(models.Model):
+#     design = models.CharField(max_length=50)
+#     usability = models.CharField(max_length=50)
+#     content = models.CharField(max_length=50)
