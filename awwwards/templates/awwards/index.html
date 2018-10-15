@@ -1,20 +1,29 @@
 {% extends 'base.html' %}
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Awwwards</title>
-</head>
-<body>
+
+{% block content %}
+    <body>
     <div class="container">
         <div class="row">
+            <div class="jumbotron">
+                hellllnoooooooo
+            </div>
+        </div>
+        <div class="row">
             <div class="col-md-12">
-            <p>hooooooome page</p>
+            {% if projects %}
+                {% for project in projects %}
+                <div>
+                    <p>{{project.title}}</p>
+                    <img src="{{project.screenshot.url}}">
+                    <p>{{project.description}}</p>
+                </div>
+                {% endfor %}
+            {% else %}
+                <p>no projects posted for now</p>
+            {% endif %}
             </div>
         </div>
     </div>
 </body>
-</html>
+{% endblock  %}
