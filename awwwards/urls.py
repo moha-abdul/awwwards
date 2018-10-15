@@ -12,6 +12,7 @@ urlpatterns=[
     url(r'^profile/',views.profile,name='profile'),
     url(r'^edit_profile/', views.edit_profile, name = 'edit_profile'),
     url(r'^add_project/', views.add_project, name = 'add_project'),
+    url(r'^single_project/(\d+)', views.single_project, name = 'single_project')
 ]
 
 if settings.DEBUG:

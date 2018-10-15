@@ -97,5 +97,6 @@ def add_project(request):
     return render(request, 'awwards/add-project.html',{"project_form": project_form})
 
 @login_required
-def single_project(request):
-    pass
+def single_project(request,project_id):
+    project = Project.objects.get(id=project_id)
+    return render(request,'awwards/single-project.html',{"project":project})

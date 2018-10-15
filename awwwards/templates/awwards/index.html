@@ -13,11 +13,13 @@
             <div class="col-md-12">
             {% if projects %}
                 {% for project in projects %}
+                <a href="/single_project/{{project.id}}">
                 <div>
                     <p>{{project.title}}</p>
                     <img src="{{project.screenshot.url}}">
                     <p>{{project.description}}</p>
                 </div>
+                </a>
                 {% endfor %}
             {% else %}
                 <p>no projects posted for now</p>
