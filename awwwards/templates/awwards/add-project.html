@@ -3,10 +3,9 @@
 {% block content %}
 
 <body>
-
   <form method="post" enctype="multipart/form-data">
         {% csrf_token %}
-        {% bootstrap_form project_form %}
+        {% bootstrap_form form %}
       <div class="text-center">  <input type="submit" class="btn btn-primary" value="Post"></div>
   </form>
 </body>

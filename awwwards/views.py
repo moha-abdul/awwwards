@@ -57,6 +57,7 @@ def activate(request, uidb64, token):
 
 def home(request):
     projects = Project.objects.all()
+
     return render(request, 'awwards/index.html',{"projects": projects})
 
 @login_required(login_url="/accounts/login/")
@@ -84,17 +85,20 @@ def edit_profile(request):
 
 @login_required
 def add_project(request):
-    profile = Profile.objects.filter(user=request.user)
     current_user = request.user
-    project_form = ProjectForm()
     if request.method == 'POST':
-        project_form = ProjectForm(request.POST,request.FILES)
-        if project_form.is_valid:
-            project_form.save()
-        else:
-            project_form = ProjectForm()
-            return render(request,'awwards/add-project.html',{"project_form": project_form})
-    return render(request, 'awwards/add-project.html',{"project_form": project_form})
+        form = ProjectForm(request.POST, request.FILES)
+        if form.is_valid():
+            image = form.save(commit=False)
+            image.user = current_user
+            image.save()
+        return redirect('/')
+
+    else:
+        form = ProjectForm()
+        return render(request, 'awwards/add-project.html', {"form": form})
+
+
 
 @login_required
 def single_project(request,project_id):

@@ -16,8 +16,8 @@ class Profile(models.Model):
         self.delete()
 
 class Project(models.Model):
-    user = models.OneToOneField(User,on_delete=models.CASCADE,related_name='user')
-    title = models.CharField(max_length=50)
+    user = models.ForeignKey(User,on_delete=models.CASCADE,related_name='user')
+    project = models.CharField(max_length=50)
     description = models.CharField(max_length=50)
     screenshot = models.ImageField(upload_to = 'screenshot/')
     project_url = models.CharField(max_length=500)
@@ -27,6 +27,12 @@ class Project(models.Model):
 
     def delete_project(self):
         self.delete()
+
+    @classmethod
+    def search_by_project(cls, search_term):
+        projects=cls.objects.filter(title__icontains=search_term)
+        return projects
+
 
 # class Rating(models.Model):
 #     design = models.CharField(max_length=50)
