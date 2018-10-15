@@ -11,8 +11,8 @@
       <nav class="navbar">
         <a href='/'>Home</a>
         
-        <form class="search-section">
-          <input class="input-search" role="search" action="#" name="search" placeholder="search"/>
+        <form class="search-section" role="search" action="{% url 'search' %}" name="search" placeholder="search">
+          <input class="input-search" />
         </form>
         <section class="icons-section">
           <a class="fa fa-upload" href="{% url 'add_project' %}">Add project</a>
