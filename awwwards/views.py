@@ -7,7 +7,7 @@ from django.utils.encoding import force_bytes, force_text
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 from django.template.loader import render_to_string
 from .tokens import account_activation_token
-from .forms import SignupForm,ProfileForm
+from .forms import SignupForm,ProfileForm,ProjectForm
 from django.contrib.auth.models import User
 from .models import Profile, Project
 from django.core.mail import EmailMessage
@@ -83,4 +83,14 @@ def edit_profile(request):
     return render(request, 'awwards/edit-profile.html', {"prof_form":prof_form,"profile":profile})
 
 def add_project(request):
-    pass
+    profile = Profile.objects.filter(user=request.user)
+    current_user = request.user
+    project_form = ProjectForm()
+    if request.method == 'POST':
+        project_form = ProjectForm(request.POST,request.FILES)
+        if project_form.is_valid:
+            project_form.save()
+        else:
+            project_form = ProjectForm()
+            return render(request,'awwards/add-project.html',{"project_form": project_form})
+    return render(request, 'awwards/add-project.html',{"project_form": project_form})

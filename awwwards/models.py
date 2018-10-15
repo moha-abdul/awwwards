@@ -19,7 +19,8 @@ class Project(models.Model):
     user = models.OneToOneField(User,on_delete=models.CASCADE,related_name='user')
     title = models.CharField(max_length=50)
     description = models.CharField(max_length=50)
-    projects = models.CharField(max_length=50)
+    screenshot = models.ImageField(upload_to = 'screenshot/')
+    project_url = models.CharField(max_length=500)
 
     def save_project(self):
         self.save()

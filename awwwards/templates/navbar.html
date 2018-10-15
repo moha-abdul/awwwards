@@ -9,12 +9,13 @@
     <div class="container-fluid">
 
       <nav class="navbar">
+        <a href='/'>Home</a>
         
         <form class="search-section">
           <input class="input-search" role="search" action="#" name="search" placeholder="search"/>
         </form>
         <section class="icons-section">
-
+          <a class="fa fa-upload" href="{% url 'add_project' %}">Add project</a>
           <a class="fa fa-user" href="/profile">Logged in as {{user.username}}</a>
           
           <a class="fa fa-user" href="/logout">Logout</a>
