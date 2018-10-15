@@ -82,6 +82,7 @@ def edit_profile(request):
             return render(request, 'awwards/edit-profile.html', {"prof_form": prof_form,"profile":profile})
     return render(request, 'awwards/edit-profile.html', {"prof_form":prof_form,"profile":profile})
 
+@login_required
 def add_project(request):
     profile = Profile.objects.filter(user=request.user)
     current_user = request.user
@@ -94,3 +95,7 @@ def add_project(request):
             project_form = ProjectForm()
             return render(request,'awwards/add-project.html',{"project_form": project_form})
     return render(request, 'awwards/add-project.html',{"project_form": project_form})
+
+@login_required
+def single_project(request):
+    pass
