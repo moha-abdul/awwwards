@@ -7,7 +7,7 @@ class Profile(models.Model):
     profile_photo  = models.ImageField(upload_to = 'profile/')
 
     def __str__(self):
-        return self.bio
+        return self.profile_bio
 
     def save_profile(self):
         self.save()
