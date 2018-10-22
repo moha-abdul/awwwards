@@ -110,10 +110,11 @@ def search_project(request):
 
     if 'project' in request.GET and request.GET["project"]:
         search_term = request.GET.get("project")
-        searched_projects = Project.search_by_project(search_term)
+        searched_projects = Project.search_by_project_title(search_term)
+        # searched_projects = Project.objects.filter(project=search_term)
         message = f"{search_term}"
 
-        return render(request, 'awwards/search.html',{"message":message,"projects": searched_projects})
+        return render(request, 'awwards/search.html',{"message":message,"searched_projects": searched_projects})
 
     else:
         message = "Project not found"

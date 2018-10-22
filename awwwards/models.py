@@ -29,10 +29,9 @@ class Project(models.Model):
         self.delete()
 
     @classmethod
-    def search_by_project(cls, search_term):
-        projects=cls.objects.filter(title__icontains=search_term)
+    def search_by_project_title(cls, search_term):
+        projects=cls.objects.filter(title=search_term)
         return projects
-
 
 # class Rating(models.Model):
 #     design = models.CharField(max_length=50)

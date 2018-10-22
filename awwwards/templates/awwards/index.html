@@ -4,15 +4,17 @@
 {% block content %}
     <body>
     <div class="container">
-        <div class="row">
+        <div class="container">
             <div class="jumbotron">
-                hellllnoooooooo
-            </div>
+                <h1>Jumbotron</h1>      
+                <p>Site of the day!</p>
+            </div>   
         </div>
         <div class="row">
-            <div class="col-md-12">
+            <div class="col-md-12 col-lg-12 col-xs-12 col-sm-12">
             {% if projects %}
                 {% for project in projects %}
+                <div>
                 <a href="/single_project/{{project.id}}">
                 <div>
                     <p>{{project.project}}</p>
