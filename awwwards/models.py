@@ -33,7 +33,8 @@ class Project(models.Model):
         projects=cls.objects.filter(title=search_term)
         return projects
 
-# class Rating(models.Model):
-#     design = models.CharField(max_length=50)
-#     usability = models.CharField(max_length=50)
-#     content = models.CharField(max_length=50)
+class Rating(models.Model):
+    creativity = models.IntegerField(max_length=50)
+    design = models.IntegerField(max_length=50)
+    usability = models.IntegerField(max_length=50)
+    content = models.IntegerField(max_length=50)

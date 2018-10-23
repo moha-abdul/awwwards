@@ -15,7 +15,6 @@
           <input class="input-search" />
         </form>
         {% if user.is_authenticated %}
-        <li class="active"><a class="smoth-scroll" href="#home">Home <div class="ripple-wrapper"></div></a>
         <li><a class="smoth-scroll" href="{% url 'edit_profile' %}">Edit_profile</a>
         </li>
         <li><a class="smoth-scroll" href="{% url 'profile' %}">Profile</a>
@@ -23,17 +22,12 @@
         <li><a class="smoth-scroll" href="{% url 'add_project'%}">Submit</a></a>
         </li>
       </li>
-      <li><a class="smoth-scroll" href="#">Logout</a>
+      <li><a class="smoth-scroll" href="/logout">Logout</a>
       </li>
         {% else %}
         <li><a class="smoth-scroll" href="accounts/login">Login</a>
         </li>
         {% endif %}
-        <section class="icons-section">
-          
-          
-          <a class="smoth-scroll href="/logout">Logout</a>
-        </section>
       </nav>
 
     </div>
